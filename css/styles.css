@@ -1443,6 +1443,9 @@ ul { list-style: none; }
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .delivery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
     .footer-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1521,9 +1524,13 @@ ul { list-style: none; }
         height: 180px;
     }
 
-    /* Order Grid */
+    /* Order / Delivery Grid */
     .order-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .delivery-grid {
+        grid-template-columns: 1fr;
     }
 
     /* About */
