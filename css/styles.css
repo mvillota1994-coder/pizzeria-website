@@ -45,6 +45,7 @@
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
+    overflow-x: hidden;
 }
 
 body {
@@ -713,6 +714,7 @@ ul { list-style: none; }
     transition: all var(--transition);
     text-decoration: none;
     color: var(--color-text);
+    min-width: 0;
 }
 
 .delivery-card:hover {
@@ -1531,6 +1533,40 @@ ul { list-style: none; }
 
     .delivery-grid {
         grid-template-columns: 1fr;
+    }
+
+    .delivery-card {
+        padding: 28px 20px;
+    }
+
+    .delivery-card-logo svg {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Catering */
+    .catering-highlight-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .catering-highlight-img {
+        min-height: 250px;
+    }
+
+    .catering-highlight-img::after {
+        background: linear-gradient(180deg, transparent 60%, var(--color-bg-card) 100%);
+    }
+
+    .catering-highlight-content {
+        padding: 32px 24px;
+    }
+
+    .catering-highlight-actions {
+        flex-direction: column;
+    }
+
+    .catering-highlight-actions .btn {
+        justify-content: center;
     }
 
     /* About */
