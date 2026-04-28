@@ -470,11 +470,13 @@ ul { list-style: none; }
 }
 
 .page-hero .hero-overlay {
-    background: linear-gradient(
-        180deg,
-        rgba(13, 13, 13, 0.8) 0%,
-        rgba(13, 13, 13, 0.9) 100%
-    );
+    background:
+        radial-gradient(ellipse at 50% 80%, rgba(230,57,70,0.06) 0%, transparent 50%),
+        linear-gradient(
+            180deg,
+            rgba(13, 13, 13, 0.8) 0%,
+            rgba(13, 13, 13, 0.92) 100%
+        );
 }
 
 .page-hero .container {
@@ -557,18 +559,20 @@ ul { list-style: none; }
     letter-spacing: 4px;
     color: var(--color-primary);
     margin-bottom: 14px;
-    padding: 6px 18px;
-    background: rgba(230, 57, 70, 0.08);
+    padding: 8px 20px;
+    background: rgba(230, 57, 70, 0.06);
     border-radius: 50px;
-    border: 1px solid rgba(230, 57, 70, 0.15);
+    border: 1px solid rgba(230, 57, 70, 0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .section-header h2 {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(2rem, 4vw, 3.25rem);
     font-weight: 900;
-    margin-bottom: 16px;
-    background: linear-gradient(135deg, var(--color-white), var(--color-text-muted));
+    margin-bottom: 18px;
+    background: linear-gradient(135deg, var(--color-white) 30%, var(--color-text-muted));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -590,16 +594,18 @@ ul { list-style: none; }
 .menu-categories {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-bottom: 48px;
+    gap: 28px;
+    margin-bottom: 56px;
 }
 
 .menu-card {
-    background: var(--color-bg-card);
-    border-radius: var(--radius-lg);
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: var(--radius-xl);
     overflow: hidden;
-    border: 1px solid var(--color-border);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--glass-border);
+    transition: all var(--transition-premium);
     position: relative;
 }
 
@@ -607,18 +613,18 @@ ul { list-style: none; }
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     opacity: 0;
-    background: linear-gradient(135deg, rgba(230, 57, 70, 0.06), transparent);
-    transition: opacity 0.4s ease;
+    background: linear-gradient(135deg, rgba(230, 57, 70, 0.08), transparent 60%);
+    transition: opacity var(--transition-premium);
     pointer-events: none;
     z-index: 1;
 }
 
 .menu-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(230, 57, 70, 0.12);
-    border-color: rgba(230, 57, 70, 0.35);
+    transform: translateY(-12px);
+    box-shadow: 0 24px 56px rgba(0, 0, 0, 0.5), 0 0 48px rgba(230, 57, 70, 0.1);
+    border-color: rgba(230, 57, 70, 0.25);
 }
 
 .menu-card:hover::before {
@@ -630,51 +636,55 @@ ul { list-style: none; }
     background-size: cover;
     background-position: center;
     position: relative;
-    transition: transform 0.5s ease;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
     overflow: hidden;
 }
 
 .menu-card:hover .menu-card-image {
-    transform: scale(1.03);
+    transform: scale(1.05);
 }
 
 .menu-card-badge {
     position: absolute;
     top: 16px;
     left: 16px;
-    background: var(--color-primary);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
     color: var(--color-white);
-    padding: 4px 14px;
+    padding: 6px 16px;
     border-radius: 50px;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 16px rgba(230,57,70,0.3);
+    z-index: 2;
 }
 
 .menu-card-body {
-    padding: 24px;
+    padding: 28px;
 }
 
 .menu-card-body h3 {
     font-family: var(--font-display);
-    font-size: 1.35rem;
+    font-size: 1.4rem;
     margin-bottom: 10px;
+    letter-spacing: -0.01em;
 }
 
 .menu-card-body p {
     color: var(--color-text-muted);
     font-size: 0.9rem;
-    margin-bottom: 16px;
-    line-height: 1.6;
+    margin-bottom: 18px;
+    line-height: 1.7;
 }
 
 .menu-card-price {
     display: block;
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 700;
     color: var(--color-accent);
-    margin-bottom: 16px;
+    margin-bottom: 18px;
+    text-shadow: 0 0 20px rgba(244,162,97,0.15);
 }
 
 .section-cta {
@@ -1192,8 +1202,10 @@ ul { list-style: none; }
    ============================================ */
 
 .menu-filter-bar {
-    background: var(--color-bg-alt);
-    border-bottom: 1px solid var(--color-border);
+    background: rgba(17, 17, 17, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
     padding: 16px 0;
     position: sticky;
     top: 60px;
@@ -1202,7 +1214,7 @@ ul { list-style: none; }
 
 .menu-filters {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     overflow-x: auto;
     padding-bottom: 4px;
     -webkit-overflow-scrolling: touch;
@@ -1214,31 +1226,36 @@ ul { list-style: none; }
 }
 
 .filter-btn {
-    padding: 10px 22px;
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border);
+    padding: 10px 24px;
+    background: rgba(26, 26, 26, 0.6);
+    border: 1px solid var(--glass-border);
     border-radius: 50px;
     color: var(--color-text-muted);
     font-family: var(--font-body);
     font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--transition-premium);
     white-space: nowrap;
     flex-shrink: 0;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .filter-btn:hover {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
-    box-shadow: 0 2px 12px rgba(230, 57, 70, 0.15);
+    border-color: rgba(230, 57, 70, 0.4);
+    color: var(--color-primary-light);
+    background: rgba(230, 57, 70, 0.06);
+    box-shadow: 0 2px 16px rgba(230, 57, 70, 0.12);
+    transform: translateY(-1px);
 }
 
 .filter-btn.active {
     background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
     border-color: var(--color-primary);
     color: var(--color-white);
-    box-shadow: 0 4px 16px rgba(230, 57, 70, 0.3);
+    box-shadow: 0 4px 20px rgba(230, 57, 70, 0.35), 0 0 40px rgba(230,57,70,0.08);
+    transform: translateY(-1px);
 }
 
 .menu-page {
@@ -1254,28 +1271,32 @@ ul { list-style: none; }
 }
 
 .menu-section-header {
-    margin-bottom: 28px;
-    padding-bottom: 18px;
-    border-bottom: 2px solid var(--color-primary);
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(230, 57, 70, 0.2);
     position: relative;
 }
 
 .menu-section-header::after {
     content: '';
     position: absolute;
-    bottom: -2px;
+    bottom: -1px;
     left: 0;
-    width: 60px;
+    width: 80px;
     height: 2px;
-    background: var(--color-primary-light);
-    box-shadow: 0 0 10px rgba(230, 57, 70, 0.5);
+    background: linear-gradient(90deg, var(--color-primary-light), transparent);
+    box-shadow: 0 0 16px rgba(230, 57, 70, 0.4);
 }
 
 .menu-section-header h2 {
     font-family: var(--font-display);
-    font-size: 1.75rem;
+    font-size: 1.85rem;
     font-weight: 900;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--color-white), var(--color-text-muted));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .menu-section-header p {
@@ -1287,7 +1308,7 @@ ul { list-style: none; }
 .menu-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 14px;
 }
 
 .menu-item {
@@ -1295,28 +1316,33 @@ ul { list-style: none; }
     justify-content: space-between;
     align-items: flex-start;
     gap: 16px;
-    padding: 16px 20px;
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    transition: all var(--transition);
+    padding: 18px 22px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-premium);
 }
 
 .menu-item:hover {
-    border-color: rgba(230, 57, 70, 0.3);
-    background: var(--color-bg-elevated);
+    border-color: rgba(230, 57, 70, 0.2);
+    background: rgba(34, 34, 34, 0.8);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3), 0 0 20px rgba(230,57,70,0.04);
+    transform: translateY(-2px);
 }
 
 .menu-item-info h3 {
     font-size: 1rem;
     font-weight: 700;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
+    color: var(--color-white);
 }
 
 .menu-item-info p {
     font-size: 0.8rem;
     color: var(--color-text-muted);
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 .menu-item-price {
@@ -1326,9 +1352,10 @@ ul { list-style: none; }
     gap: 2px;
     font-weight: 700;
     color: var(--color-accent);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     white-space: nowrap;
     flex-shrink: 0;
+    text-shadow: 0 0 16px rgba(244,162,97,0.12);
 }
 
 .menu-note {
