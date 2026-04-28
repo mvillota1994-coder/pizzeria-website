@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Scroll-triggered animations ---
     const observerOptions = {
         threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        rootMargin: '0px 0px -60px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -91,12 +91,79 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    // Observe elements for fade-in
     document.querySelectorAll(
-        '.menu-card, .order-card, .feature-item, .info-card, .about-content, .about-image, .menu-section'
+        '.menu-card, .order-card, .feature-item, .info-card, .about-content, .about-image, .menu-section, .delivery-card, .catering-highlight-inner'
     ).forEach(el => {
-        el.classList.add('fade-in');
+        if (!el.classList.contains('reveal-scale') && !el.classList.contains('reveal-left') && !el.classList.contains('reveal-right')) {
+            el.classList.add('fade-in');
+        }
         observer.observe(el);
+    });
+
+    // --- Staggered menu item reveals ---
+    const itemObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const items = entry.target.querySelectorAll('.menu-item');
+                items.forEach((item, i) => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(20px)';
+                    item.style.transition = `opacity 0.5s cubic-bezier(0.23,1,0.32,1) ${i * 0.04}s, transform 0.5s cubic-bezier(0.23,1,0.32,1) ${i * 0.04}s`;
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        });
+                    });
+                });
+                itemObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.05 });
+
+    document.querySelectorAll('.menu-grid').forEach(grid => itemObserver.observe(grid));
+
+    // --- Count-up animation for stats ---
+    const countObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const text = el.textContent;
+                const match = text.match(/(\d+)/);
+                if (match) {
+                    const target = parseInt(match[1]);
+                    const suffix = text.replace(match[1], '');
+                    let current = 0;
+                    const duration = 1200;
+                    const start = performance.now();
+                    const animate = (now) => {
+                        const elapsed = now - start;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const eased = 1 - Math.pow(1 - progress, 3);
+                        current = Math.round(eased * target);
+                        el.textContent = current + suffix;
+                        if (progress < 1) requestAnimationFrame(animate);
+                    };
+                    requestAnimationFrame(animate);
+                }
+                countObserver.unobserve(el);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.stat-number').forEach(stat => countObserver.observe(stat));
+
+    // --- 3D tilt on premium cards ---
+    document.querySelectorAll('.menu-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            card.style.transform = `translateY(-16px) scale(1.01) perspective(600px) rotateX(${y * -5}deg) rotateY(${x * 5}deg)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+        });
     });
 
     // --- Smooth scroll for anchor links ---
