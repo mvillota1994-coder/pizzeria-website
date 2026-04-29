@@ -1090,21 +1090,37 @@ ul { list-style: none; }
 
 /* --- Location Section --- */
 .location-section {
-    padding: 100px 0;
-    background: var(--color-bg-alt);
+    padding: 120px 0;
+    background: linear-gradient(180deg, var(--color-bg-alt) 0%, rgba(13,13,13,0.97) 100%);
+    position: relative;
 }
 
 .location-grid {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
-    gap: 32px;
+    gap: 36px;
     min-height: 450px;
 }
 
 .location-map {
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     overflow: hidden;
     min-height: 400px;
+    border: 1px solid var(--glass-border);
+    box-shadow:
+        0 16px 56px rgba(0,0,0,0.4),
+        0 0 0 1px rgba(255,255,255,0.03);
+    position: relative;
+}
+
+.location-map::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-xl);
+    box-shadow: inset 0 0 60px rgba(0,0,0,0.3);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .location-map iframe {
@@ -1116,59 +1132,90 @@ ul { list-style: none; }
 .location-info {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
 }
 
 .info-card {
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: 24px;
-    transition: all var(--transition);
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    transition: all var(--transition-premium);
+    position: relative;
+}
+
+.info-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(230,57,70,0.15), transparent 50%);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
 
 .info-card:hover {
-    border-color: rgba(230, 57, 70, 0.25);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    transform: translateY(-2px);
+    border-color: rgba(230, 57, 70, 0.2);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 0 40px rgba(230,57,70,0.04);
+    transform: translateY(-4px);
+}
+
+.info-card:hover::before {
+    opacity: 1;
 }
 
 .info-card h3 {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 1rem;
+    gap: 12px;
+    font-size: 0.85rem;
     font-weight: 700;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     color: var(--color-white);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
 }
 
 .info-card h3 svg {
     color: var(--color-primary);
+    filter: drop-shadow(0 0 6px rgba(230,57,70,0.3));
+    transition: filter 0.4s ease;
+}
+
+.info-card:hover h3 svg {
+    filter: drop-shadow(0 0 12px rgba(230,57,70,0.5));
 }
 
 .info-card p {
     color: var(--color-text-muted);
     font-size: 0.95rem;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 .info-card a {
     color: var(--color-text-muted);
+    transition: all 0.4s ease;
+    position: relative;
 }
 
-.info-card a:hover {
+.info-card a:not(.btn):hover {
     color: var(--color-primary-light);
+    text-shadow: 0 0 16px rgba(230,57,70,0.2);
 }
 
 .info-card .btn {
-    margin-top: 12px;
+    margin-top: 14px;
 }
 
 .hours-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 .hours-row {
@@ -1176,6 +1223,17 @@ ul { list-style: none; }
     justify-content: space-between;
     font-size: 0.9rem;
     color: var(--color-text-muted);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    transition: color 0.3s ease;
+}
+
+.hours-row:last-child {
+    border-bottom: none;
+}
+
+.hours-row:hover {
+    color: var(--color-text);
 }
 
 /* --- Contact Banner --- */
@@ -1264,69 +1322,91 @@ ul { list-style: none; }
 
 /* --- Footer --- */
 .footer {
-    background: var(--color-bg-alt);
-    border-top: 1px solid var(--color-border);
-    padding: 60px 0 30px;
+    background: linear-gradient(180deg, var(--color-bg-alt) 0%, rgba(10,10,10,1) 100%);
+    border-top: 1px solid rgba(255,255,255,0.04);
+    padding: 80px 0 40px;
+    position: relative;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(230,57,70,0.4), transparent);
+    box-shadow: 0 0 20px rgba(230,57,70,0.15);
 }
 
 .footer-grid {
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 40px;
+    gap: 48px;
+    margin-bottom: 48px;
 }
 
 .footer-brand p {
     color: var(--color-text-muted);
-    margin-top: 16px;
+    margin-top: 20px;
     font-size: 0.9rem;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 .footer-links h4,
 .footer-contact h4 {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--color-white);
-    margin-bottom: 16px;
+    letter-spacing: 3px;
+    color: var(--color-primary);
+    margin-bottom: 20px;
 }
 
 .footer-links ul {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
 .footer-links a {
     font-size: 0.9rem;
     color: var(--color-text-muted);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    display: inline-block;
 }
 
 .footer-links a:hover {
-    color: var(--color-primary-light);
+    color: var(--color-white);
+    transform: translateX(4px);
 }
 
 .footer-contact p {
     color: var(--color-text-muted);
     font-size: 0.9rem;
-    line-height: 1.6;
+    line-height: 1.8;
+}
+
+.footer-contact a {
+    transition: all 0.4s ease;
 }
 
 .footer-contact a:hover {
     color: var(--color-primary-light);
+    text-shadow: 0 0 16px rgba(230,57,70,0.2);
 }
 
 .footer-bottom {
-    border-top: 1px solid var(--color-border);
-    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    padding-top: 32px;
     text-align: center;
 }
 
 .footer-bottom p {
     font-size: 0.8rem;
     color: var(--color-text-dim);
+    letter-spacing: 0.5px;
 }
 
 /* ============================================
@@ -1879,7 +1959,7 @@ ul { list-style: none; }
     .contact-banner {
         flex-direction: column;
         text-align: center;
-        padding: 40px 24px;
+        padding: 48px 28px;
     }
 
     .contact-banner-actions {
