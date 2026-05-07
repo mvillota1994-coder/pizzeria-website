@@ -420,7 +420,7 @@ ul { list-style: none; }
 
 @keyframes filterGlow {
     0%, 100% { box-shadow: 0 4px 20px rgba(230,57,70,0.3), 0 0 40px rgba(230,57,70,0.06); }
-    50% { box-shadow: 0 4px 28px rgba(230,57,70,0.5), 0 0 60px rgba(230,57,70,0.12); }
+    50% { box-shadow: 0 4px 24px rgba(230,57,70,0.4), 0 0 50px rgba(230,57,70,0.1); }
 }
 
 @keyframes gradientFlow {
@@ -775,7 +775,7 @@ ul { list-style: none; }
 
 .section-cta {
     text-align: center;
-    margin-top: 8px;
+    margin-top: 16px;
 }
 
 /* --- Order Section --- */
@@ -800,12 +800,12 @@ ul { list-style: none; }
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     text-align: center;
-    transition: all var(--transition);
+    transition: all var(--transition-premium);
 }
 
 .order-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
 }
 
 .order-card--ubereats:hover { border-color: #06c167; }
@@ -822,7 +822,7 @@ ul { list-style: none; }
     border-radius: 50%;
     background: var(--color-surface);
     color: var(--color-text-muted);
-    transition: all var(--transition);
+    transition: all var(--transition-premium);
 }
 
 .order-card--ubereats:hover .order-card-icon { background: rgba(6,193,103,0.15); color: #06c167; }
@@ -839,7 +839,7 @@ ul { list-style: none; }
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--color-text-muted);
-    transition: color var(--transition);
+    transition: color var(--transition-premium);
 }
 
 .order-card:hover .order-card-cta {
@@ -1225,7 +1225,7 @@ ul { list-style: none; }
     color: var(--color-text-muted);
     padding: 6px 0;
     border-bottom: 1px solid rgba(255,255,255,0.03);
-    transition: color 0.3s ease;
+    transition: color 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .hours-row:last-child {
@@ -1238,7 +1238,7 @@ ul { list-style: none; }
 
 /* --- Contact Banner --- */
 .contact-section {
-    padding: 100px 0;
+    padding: 120px 0;
 }
 
 .contact-banner {
@@ -1503,7 +1503,7 @@ ul { list-style: none; }
 
 .menu-section-header h2 {
     font-family: var(--font-display);
-    font-size: 2rem;
+    font-size: clamp(1.6rem, 3vw, 2rem);
     font-weight: 900;
     margin-bottom: 8px;
     letter-spacing: -0.02em;
@@ -1978,6 +1978,14 @@ ul { list-style: none; }
     }
 
     /* Menu Page */
+    .menu-page {
+        padding: 56px 0 80px;
+    }
+
+    .menu-section {
+        margin-bottom: 64px;
+    }
+
     .menu-grid {
         grid-template-columns: 1fr;
     }
@@ -2000,12 +2008,20 @@ ul { list-style: none; }
     .cta-buttons .btn {
         justify-content: center;
     }
+
+    .order-cta-banner {
+        padding: 72px 0;
+    }
 }
 
 @media (max-width: 480px) {
     .features-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         gap: 16px;
+    }
+
+    .feature-item {
+        padding: 20px 16px;
     }
 
     .order-grid {
@@ -2013,6 +2029,7 @@ ul { list-style: none; }
     }
 
     .about-stats {
+        flex-wrap: wrap;
         gap: 24px;
     }
 
@@ -2023,5 +2040,25 @@ ul { list-style: none; }
     .hero-actions .btn {
         width: 100%;
         justify-content: center;
+    }
+
+    .contact-banner {
+        padding: 36px 20px;
+    }
+
+    .section-header h2 {
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
+    }
+
+    .page-hero {
+        padding: 130px 0 60px;
+    }
+
+    .menu-page {
+        padding: 48px 0 72px;
+    }
+
+    .menu-section {
+        margin-bottom: 56px;
     }
 }
